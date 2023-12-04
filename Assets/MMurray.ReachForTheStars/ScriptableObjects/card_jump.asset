@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e37b69017df7ca4a83851557d2d21ad, type: 3}
+  m_Name: card_jump
+  m_EditorClassIdentifier: 
+  cardID: 7
+  nameKey: cardName_7
+  abilityKey: ability_7
+  tipKey: tip_7
+  cardName: Jump!
+  ability: Move to the same space as the nearest player. No dice roll this turn.
+  tip: Make sure you know which opponent you're going to jump to before using this
+    card!
+  artID: 7
+  weight: 30
+  targetType: 1

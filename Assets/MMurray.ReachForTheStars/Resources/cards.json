@@ -1,0 +1,37 @@
+{
+	"cardTypes":
+	[
+		{
+			"cardID":0, "amount":6, "weight":15, "cardName":"Swift Movement", "ability":"Adds 2-4 to dice roll.", 
+			"tip":"This card is useful for cancelling 'Move 1/2/3' effects!"
+		},
+		{
+			"cardID":1, "amount":2, "weight":25, "cardName":"Move 1", "ability":"Target player moves 1 space, and does not roll dice this turn.", 
+			"tip":"Don't be afraid to use this card on yourself if it will help you!"
+		},
+		{
+			"cardID":2, "amount":2, "weight":20, "cardName":"Move 2", "ability":"Target player moves 2 spaces, and does not roll dice this turn.", 
+			"tip":"Don't be afraid to use this card on yourself if it will help you!"
+		},
+		{
+			"cardID":3, "amount":2, "weight":20, "cardName":"Move 3", "ability":"Target player moves 3 spaces, and does not roll dice this turn.", 
+			"tip":"Don't be afraid to use this card on yourself if it will help you!"
+		},
+		{
+			"cardID":4, "amount":1, "weight":20, "cardName":"Extend!", "ability":"+1 round this game.", 
+			"tip":"The player in the lead has no reason to use this card."
+		},
+		{
+			"cardID":5, "amount":5, "weight":5, "cardName":"Refill!", "ability":"The nearest Star Cache ahead of you with a probability of 0.5 or less becomes 1.", 
+			"tip":"This card only searches in the direction you're travelling."
+		},
+		{
+			"cardID":6, "amount":1, "weight":65, "cardName":"Go Home!", "ability":"Move to Home.", 
+			"tip":"If you have 9+ stars and it's the last round, congratulations!"
+		},
+		{
+			"cardID":7, "amount":4, "weight":30, "cardName":"Jump!", "ability":"Move to the same space as the nearest player. No dice roll this turn.", 
+			"tip":"Make sure you know which opponent you're going to jump to before using this card!"
+		}
+	]
+}

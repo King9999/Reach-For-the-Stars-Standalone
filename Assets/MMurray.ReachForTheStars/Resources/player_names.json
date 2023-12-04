@@ -1,0 +1,27 @@
+{
+    "playerNames":
+    [
+        
+        {"name":"Cat Lover"},
+        {"name":"Dog Lover"},
+        {"name":"Ace"},
+        {"name":"Queen"},
+        {"name":"Jack"},
+        {"name":"King"},
+        {"name":"Matryoshka"},
+        {"name":"Ancient One"},
+        {"name":"Food Lover"},
+        {"name":"Sleepy"},
+        {"name":"Wanderer"},
+        {"name":"Dragon"},
+        {"name":"Turtle"},
+        {"name":"Frog"},
+        {"name":"Bunny"},
+        {"name":"Game Master"},
+        {"name":"Hero"},
+        {"name":"Villain"},
+        {"name":"Nobody"},
+        {"name":"Scrub"},
+        {"name":"Joker"}
+    ]
+}
