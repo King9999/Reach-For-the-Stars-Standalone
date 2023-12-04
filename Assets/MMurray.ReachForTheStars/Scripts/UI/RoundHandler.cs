@@ -20,22 +20,22 @@ public class RoundHandler : MonoBehaviour
         //nextRoundEffect.transform.position = Camera.main.WorldToScreenPoint(nextRoundValueUI.transform.position);
     }
 
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
-    string GetText (string key, string number)
+    /*string GetText (string key, string number)
     {
         string value = SharedState.LanguageDefs?[key];
         return value + number ?? "--missing--";
-    }
+    }*/
 
     //must call this during load state
     public void UpdateLanguage()
     {
-        nextRoundTextUI.text = GetText("nextRoundText");
+        nextRoundTextUI.text = UniversalSettings.instance.GetText("nextRoundText");
     }
 
     // Update is called once per frame

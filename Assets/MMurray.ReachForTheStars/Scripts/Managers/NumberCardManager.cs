@@ -179,7 +179,7 @@ public class NumberCardManager : MonoBehaviour
         ToggleNumberCardUIContainer(false);
 
         //stop TTS in case it's still running
-        ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+        //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
 
         //GameManager gm = GameManager.instance;
         if (tm == null)

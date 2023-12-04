@@ -20,14 +20,15 @@ public class MiniLesson : MonoBehaviour
     //changes close button to different languages
     public void UpdateCloseButtonLanguage()
     {
+        UniversalSettings us = UniversalSettings.instance;
         switch(lessonID)
         {
             case 6: case 9: case 11: case 14: case 16: case 17:
-                closeButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("nextButtonText");
+                closeButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("nextButtonText");
                 break;
             
             default:
-                closeButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("closeButtonText");
+                closeButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("closeButtonText");
                 break; 
         }
         /*if (lessonID == 6 || lessonID == 9 || lessonID == 11 || lessonID == 14)
@@ -36,17 +37,17 @@ public class MiniLesson : MonoBehaviour
             closeButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("closeButtonText");*/ 
     }
 
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
     public void ToggleUIElements(bool toggle)
     {
         lessonDetails.gameObject.SetActive(toggle);
         //populate the lesson
-        lessonDetails.text = GetText(detailsKey);
+        lessonDetails.text = UniversalSettings.instance.GetText(detailsKey);
         closeButton.gameObject.SetActive(false);
         StartCoroutine(AnimateText(0.032f, lessonDetails.text));
     }
@@ -62,7 +63,7 @@ public class MiniLesson : MonoBehaviour
         
 
         //stop TTS
-        ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+        //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
         StopAllCoroutines();
        
         

@@ -12,11 +12,11 @@ public class ResultsHandler : MonoBehaviour
     string resultTextDraw, resultTextWin;
     public ParticleSystem confetti;
 
-   string GetText (string key, string playerName = "")
+   /*string GetText (string key, string playerName = "")
    {
         string value = SharedState.LanguageDefs?[key];
         return playerName + value ?? "--missing--";
-   }
+   }*/
 
     public void ToggleResultsHandler(bool toggle)
     {
@@ -42,7 +42,7 @@ public class ResultsHandler : MonoBehaviour
         Vector3 destinationScale = resultLabelUI.transform.localScale * 1.4f;
         Vector3 secondaryScale = resultLabelUI.transform.localScale * 1.2f;
         resultLabelUI.transform.localScale = Vector3.zero;
-        resultLabelUI.text = GetText("showWinner", winnerName); /*winnerName + " is the winner!"*/;
+        resultLabelUI.text = winnerName + UniversalSettings.instance.GetText("showWinner");//, winnerName); /*winnerName + " is the winner!"*/;
 
         float scaleSpeed = 4;
         yield return ScaleWinnerLabel(scaleSpeed, destinationScale.x);
@@ -67,7 +67,7 @@ public class ResultsHandler : MonoBehaviour
     {
         float alpha = 0;
         resultLabelUI.color = new Color(resultLabelUI.color.r, resultLabelUI.color.g, resultLabelUI.color.b, alpha);
-        resultLabelUI.text = GetText("drawGame"); /*"Draw..."*/;
+        resultLabelUI.text = UniversalSettings.instance.GetText("drawGame"); //"Draw..."*/;
         float speed = 2;
 
         while (resultLabelUI.color.a < 1)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using LoLSDK;
+//using LoLSDK;
 
 //This script provides card information to the player. If the player is AI, both the card art and the details are hidden.
 namespace MMurray.ReachForTheStars
@@ -51,7 +51,7 @@ namespace MMurray.ReachForTheStars
         public void OnPointerExit(PointerEventData pointer)
         {
             //stop TTS
-            ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+            //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
             StopAllCoroutines();
             UI ui = UI.instance;
             ui.DisplayCardText(false);
@@ -128,13 +128,13 @@ namespace MMurray.ReachForTheStars
                 ui.DisplayCardText(true, cardName, abilityDetails, tip);
 
                 //TTS describes the card
-                UniversalSettings us = UniversalSettings.instance;
+                /*UniversalSettings us = UniversalSettings.instance;
                 if (us.ttsEnabled)
                 {
                     //string[] keys = {nameKey, abilityKey, tipKey};
                     //StartCoroutine(PlayTTS(keys, 5.5f));
                     StartCoroutine(PlayTTS(nameKey, abilityKey, tipKey));
-                }
+                }*/
             }
 
             //if the dice roll record or card draw rate window is open, they're temporarily hidden.
@@ -146,19 +146,19 @@ namespace MMurray.ReachForTheStars
         }
 
 
-        IEnumerator PlayTTS(string[] keys, float duration = 0)
+        /*IEnumerator PlayTTS(string[] keys, float duration = 0)
         {
             int i = 0;
             while(i < keys.Length)
             {
-                LOLSDK.Instance.SpeakText(keys[i]);
+                //LOLSDK.Instance.SpeakText(keys[i]);
                 //yield return new WaitUntil(() => !audioSource.isPlaying);
                 yield return new WaitForSeconds(duration);
                 i++;
             }
-        }
+        }*/
 
-        IEnumerator PlayTTS(string nameKey, string abilityKey, string tipKey)
+        /*IEnumerator PlayTTS(string nameKey, string abilityKey, string tipKey)
         {
             LOLSDK.Instance.SpeakText(nameKey);
             yield return new WaitForSeconds(2);
@@ -169,13 +169,13 @@ namespace MMurray.ReachForTheStars
             LOLSDK.Instance.SpeakText(tipKey);
             yield return new WaitForSeconds(5.5f);
 
-        }
+        }*/
 
-        IEnumerator PlayTTS(string key, float duration = 0)
+        /*IEnumerator PlayTTS(string key, float duration = 0)
         {
             LOLSDK.Instance.SpeakText(key);
             yield return new WaitForSeconds(duration);
-        }
+        }*/
 
         //this method is activated with a button press
         /*public void PlayCard()

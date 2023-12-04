@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LoLSDK;
+//using LoLSDK;
 using MMurray.ReachForTheStars;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {   
     
     public GameData gameData;
-    SaveState saveState;
+    //SaveState saveState;
     public bool resumedSaveState;       //if true, continuing game from saved state
 
     public enum GameState
@@ -146,8 +146,8 @@ public class GameManager : MonoBehaviour
         ag = AssessmentGame.instance;
         em = ExtraModManager.instance;
 
-        saveState = new SaveState();
-        gameData = new GameData(); 
+        //saveState = new SaveState();
+        //gameData = new GameData(); 
 
 
         diceRollRecord = new int[totalDiceValues];
@@ -356,16 +356,16 @@ public class GameManager : MonoBehaviour
 
         /*****TRY LOADING SAVE STATE HERE*******/
         
-        if (tm.saveStateFound && !tm.newGameStarted)
+        /*if (tm.saveStateFound && !tm.newGameStarted)
         {
             //saveState.ReadState(gameData);
             resumedSaveState = true;
             saveState.LoadState(saveState.ReadState);
             //ui.UpdateLanguage();
             //SetGameState(GameState.NewRound);
-        }
-        else
-        {
+        }*/
+        //else
+        //{
             //set up deck
             cm.SetupCards();
             cm.ShuffleCards();
@@ -459,7 +459,7 @@ public class GameManager : MonoBehaviour
                         {
                             case 0:
                                 em.activeMod = ScriptableObject.CreateInstance<StarvingMod>();
-                                em.activeMod.modName = GetText(em.extraMods[i].modNameKey);
+                                em.activeMod.modName = us.GetText(em.extraMods[i].modNameKey);
                                 em.activeMod.boardID = em.extraMods[i].boardID;
                                 //ui.ToggleExtraModeContainer(true);
                                 ui.modNameText.text = em.activeMod.modName;
@@ -467,7 +467,7 @@ public class GameManager : MonoBehaviour
 
                             case 1:
                                 em.activeMod = ScriptableObject.CreateInstance<JumpMod>();
-                                em.activeMod.modName = GetText(em.extraMods[i].modNameKey);
+                                em.activeMod.modName = us.GetText(em.extraMods[i].modNameKey);
                                 em.activeMod.boardID = em.extraMods[i].boardID;
                                 //ui.ToggleExtraModeContainer(true);
                                 ui.ToggleJumpChanceText(true);
@@ -477,28 +477,28 @@ public class GameManager : MonoBehaviour
                             
                             case 2:
                                 em.activeMod = ScriptableObject.CreateInstance<StunMod>();
-                                em.activeMod.modName = GetText(em.extraMods[i].modNameKey);
+                                em.activeMod.modName = us.GetText(em.extraMods[i].modNameKey);
                                 em.activeMod.boardID = em.extraMods[i].boardID;
                                 ui.modNameText.text = em.activeMod.modName;
                                 break;
 
                             case 3:
                                 em.activeMod = ScriptableObject.CreateInstance<DrawCardMod>();
-                                em.activeMod.modName = GetText(em.extraMods[i].modNameKey);
+                                em.activeMod.modName = us.GetText(em.extraMods[i].modNameKey);
                                 em.activeMod.boardID = em.extraMods[i].boardID;
                                 ui.modNameText.text = em.activeMod.modName;
                                 break;
 
                             case 4:
                                 em.activeMod = ScriptableObject.CreateInstance<RareMod>();
-                                em.activeMod.modName = GetText(em.extraMods[i].modNameKey);
+                                em.activeMod.modName = us.GetText(em.extraMods[i].modNameKey);
                                 em.activeMod.boardID = em.extraMods[i].boardID;
                                 ui.modNameText.text = em.activeMod.modName;
                                 break;
 
                             case 5:
                                 em.activeMod = ScriptableObject.CreateInstance<HomelessMod>();
-                                em.activeMod.modName = GetText(em.extraMods[i].modNameKey);
+                                em.activeMod.modName = us.GetText(em.extraMods[i].modNameKey);
                                 em.activeMod.boardID = em.extraMods[i].boardID;
                                 ui.modNameText.text = em.activeMod.modName;
                                 break;
@@ -543,7 +543,7 @@ public class GameManager : MonoBehaviour
 
             //set game state
             SetGameState(GameState.NewRound);
-        }
+        //}
     }
 
     //activated by the Quit Game button
@@ -560,17 +560,17 @@ public class GameManager : MonoBehaviour
     }
     
     //Ends the game
-    public void QuitGame()
+    /*public void QuitGame()
     {
         LOLSDK.Instance.CompleteGame();
-    }
+    }*/
 
     //used to show shortened version of Swift Movement name in player panel.
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
 
     /* This method is only used to restart a game with existing board and players, and is called by the Restart Game button */
@@ -1080,7 +1080,7 @@ public class GameManager : MonoBehaviour
                 {
                     //game is over, check for a tie
                     //submit current progress
-                    LOLSDK.Instance.SubmitProgress(playerList[0].starTotal, maxRounds, maxRounds);
+                    //LOLSDK.Instance.SubmitProgress(playerList[0].starTotal, maxRounds, maxRounds);
                     //saveState.WriteState(gameData);
                     //foreach(Player player in playerList)
                         //player.starTotal = 0;
@@ -1091,7 +1091,7 @@ public class GameManager : MonoBehaviour
                 {
                     //open up a lesson
                     lessonViewedThisRound = true;
-                    saveState.WriteState(gameData);
+                    //saveState.WriteState(gameData);
                     goto case GameState.GetLesson;    
                 }
                 else
@@ -1108,7 +1108,7 @@ public class GameManager : MonoBehaviour
                     }
                     
                     resumedSaveState = false;
-                    saveState.WriteState(gameData);
+                    //saveState.WriteState(gameData);
                     lessonViewedThisRound = false;
                     currentRound++;
                     //currentRound += 10;
@@ -1579,7 +1579,7 @@ public class GameManager : MonoBehaviour
                         //get card effect information. We make a special case for Swift Movement because its name is long
                         if (currentPlayer.selectedCard.cardID == 0) //swift movement ID
                         {
-                            ui.playerPanels[targetIndex].cardEffectUI.SetCardDetails(GetText("swiftMove")/*"SWIFT MOVE"*/, currentPlayer.selectedCard.ability);
+                            ui.playerPanels[targetIndex].cardEffectUI.SetCardDetails(us.GetText("swiftMove")/*"SWIFT MOVE"*/, currentPlayer.selectedCard.ability);
                         }
                         else
                         {
@@ -1983,7 +1983,7 @@ public class GameManager : MonoBehaviour
                         SetupExtraRound();
                         playerIndex = 0;       
                         currentPlayer = playerList[playerIndex];
-                        saveState.WriteState(gameData);
+                        //saveState.WriteState(gameData);
                         goto case GameState.NewRound;
                     }
                 }
@@ -1993,7 +1993,7 @@ public class GameManager : MonoBehaviour
                     SetupExtraRound();
                     playerIndex = 0;       
                     currentPlayer = playerList[playerIndex];
-                    saveState.WriteState(gameData);
+                    //saveState.WriteState(gameData);
                     goto case GameState.NewRound;
                 }
                 //break;

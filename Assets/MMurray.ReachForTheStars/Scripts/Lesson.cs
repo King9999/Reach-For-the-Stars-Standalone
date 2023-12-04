@@ -26,16 +26,16 @@ public class Lesson : MonoBehaviour
     //coroutine
     IEnumerator animateText;        
 
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
     //changes close button to different languages
     public void UpdateCloseButtonLanguage()
     {
-        closeButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("closeButtonText"); 
+        closeButton.GetComponentInChildren<TextMeshProUGUI>().text = UniversalSettings.instance.GetText("closeButtonText"); 
     }
 
     public void ToggleUIElements(bool detailsEnabled = true, bool sidebarEnabled = false, bool imageEnabled = false)
@@ -50,9 +50,10 @@ public class Lesson : MonoBehaviour
         lessonImage.gameObject.SetActive(imageEnabled);
 
         //populate the lesson
-        lessonTitle.text = GetText(titleKey);
-        lessonDetails.text = GetText(detailsKey);
-        lessonSidebar.text = GetText(sidebarKey);
+        UniversalSettings us = UniversalSettings.instance;
+        lessonTitle.text = us.GetText(titleKey);
+        lessonDetails.text = us.GetText(detailsKey);
+        lessonSidebar.text = us.GetText(sidebarKey);
         //image is populated in Inspector if applicable
 
         //animate text
@@ -92,7 +93,7 @@ public class Lesson : MonoBehaviour
             }
 
             //stop TTS
-            ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+            //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
             StopAllCoroutines();
         }
         else
@@ -103,7 +104,7 @@ public class Lesson : MonoBehaviour
             else
                 tm.SetGameState(TutorialManager.GameState.NewRound);
 
-            ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+            //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
             StopAllCoroutines();
             gameObject.SetActive(false);
         }
@@ -115,7 +116,7 @@ public class Lesson : MonoBehaviour
         Time.timeScale = 1;
         UI ui = UI.instance;
         ui.TogglePauseText(false);
-        ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+        //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
         StopAllCoroutines();
         gameObject.SetActive(false);
     }
@@ -125,7 +126,7 @@ public class Lesson : MonoBehaviour
     {
         AudioManager am = AudioManager.instance;
         am.soundSource.PlayOneShot(am.click, am.soundVolume);
-        ((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
+        //((ILOLSDK_EXTENSION)LOLSDK.Instance.PostMessage).CancelSpeakText();
         StopAllCoroutines();
         gameObject.SetActive(false);
 

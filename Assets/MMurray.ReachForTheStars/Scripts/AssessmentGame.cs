@@ -100,24 +100,25 @@ public class AssessmentGame : MonoBehaviour
 
     public void UpdateLanguage()
     {
-        rollButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("rollDiceButtonText");
-        instructionText.text = GetText("assessmentGame_rollInstruction", maxRolls - rollCount);
-        rollResultsText.text = GetText("assessmentGame_rollResultsLabel");
-        rollResultsValueText.text = GetText("assessmentGame_rollResultsValueLabel");
-        diceProbText.text = GetText("assessmentGame_diceProbLabel");
+        UniversalSettings us = UniversalSettings.instance;
+        rollButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("rollDiceButtonText");
+        instructionText.text = us.GetText("assessmentGame_rollInstruction") + (maxRolls - rollCount);
+        rollResultsText.text = us.GetText("assessmentGame_rollResultsLabel");
+        rollResultsValueText.text = us.GetText("assessmentGame_rollResultsValueLabel");
+        diceProbText.text = us.GetText("assessmentGame_diceProbLabel");
     }
 
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
-    string GetText (string key, int number)
+    /*string GetText (string key, int number)
     {
         string value = SharedState.LanguageDefs?[key];
         return value + number ?? "--missing--";
-    }
+    }*/
 
     void ToggleRollButton(bool toggle)
     {
@@ -229,10 +230,10 @@ public class AssessmentGame : MonoBehaviour
                 diceProbValueUI[i].text = "";
             }
 
-            instructionText.text = GetText("assessmentGame_rollInstruction", maxRolls - rollCount);
-            UniversalSettings us = UniversalSettings.instance;
-            if (us.ttsEnabled)
-                LOLSDK.Instance.SpeakText("assessmentGame_rollInstruction");
+            instructionText.text = UniversalSettings.instance.GetText("assessmentGame_rollInstruction") + (maxRolls - rollCount);
+            //UniversalSettings us = UniversalSettings.instance;
+            //if (us.ttsEnabled)
+                //LOLSDK.Instance.SpeakText("assessmentGame_rollInstruction");
             
         }
     }
@@ -252,7 +253,7 @@ public class AssessmentGame : MonoBehaviour
         {
             case Question.HighestValue:
                 question = Question.HighestValue;
-                instructionText.text = GetText("assessmentGame_question1");
+                instructionText.text = us.GetText("assessmentGame_question1");
 
                 //find the highest probability
                 float highestProb = 0;
@@ -271,13 +272,13 @@ public class AssessmentGame : MonoBehaviour
                         correctAnswers.Add(rolledValues[i]);
                 }
 
-                if (us.ttsEnabled)
-                    LOLSDK.Instance.SpeakText("assessmentGame_question1");
+                //if (us.ttsEnabled)
+                    //LOLSDK.Instance.SpeakText("assessmentGame_question1");
                 break;
 
             case Question.LowestValue:
                 question = Question.LowestValue;
-                instructionText.text = GetText("assessmentGame_question2");
+                instructionText.text = us.GetText("assessmentGame_question2");
 
                 //find the lowest probability
                 float lowestProb = 1;
@@ -295,8 +296,8 @@ public class AssessmentGame : MonoBehaviour
                     if (rolledProbs[i] == lowestProb)
                         correctAnswers.Add(rolledValues[i]);
                 }
-                if (us.ttsEnabled)
-                    LOLSDK.Instance.SpeakText("assessmentGame_question2");
+                //if (us.ttsEnabled)
+                    //LOLSDK.Instance.SpeakText("assessmentGame_question2");
                 break;
         }
 
@@ -591,7 +592,7 @@ public class AssessmentGame : MonoBehaviour
 
         //when this finishes, start the roll again.
         rollCount++;
-        instructionText.text = GetText("assessmentGame_rollInstruction", maxRolls - rollCount);
+        instructionText.text = UniversalSettings.instance.GetText("assessmentGame_rollInstruction") + (maxRolls - rollCount);
         diceValueText.text = "";
         animateDiceValueCoroutineOn = false;
 
