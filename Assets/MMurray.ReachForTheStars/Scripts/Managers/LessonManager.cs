@@ -64,9 +64,9 @@ public class LessonManager : MonoBehaviour
 
             //TTS
             UniversalSettings us = UniversalSettings.instance;
-            if (us.ttsEnabled)
-            {
-                LOLSDK.Instance.SpeakText(lessonList[id].detailsKey);
+            //if (us.ttsEnabled)
+            //{
+                //LOLSDK.Instance.SpeakText(lessonList[id].detailsKey);
                 /*switch(id)
                 {
                     case 5: case 6: case 9: case 10: case 12: case 15:
@@ -82,7 +82,7 @@ public class LessonManager : MonoBehaviour
                     LOLSDK.Instance.SpeakText(lessonList[id].detailsKey);
                 else if (lessonList[id].sidebarEnabled)
                     LOLSDK.Instance.SpeakText(lessonList[id].sidebarKey);*/
-            }
+            //}
         }
     }
 
@@ -113,11 +113,11 @@ public class LessonManager : MonoBehaviour
             
 
             //TTS
-            UniversalSettings us = UniversalSettings.instance;
+            /*UniversalSettings us = UniversalSettings.instance;
             if (us.ttsEnabled)
             {
                 LOLSDK.Instance.SpeakText(miniLessonList[id].detailsKey);
-            }
+            }*/
         }
     }
 }

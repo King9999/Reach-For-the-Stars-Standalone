@@ -55,26 +55,27 @@ public class NumberCardManager : MonoBehaviour
         tm = TutorialManager.instance;
     }
 
-    string GetText (string key, string playerName = "")
+    /*string GetText (string key, string playerName = "")
     {
         string value = SharedState.LanguageDefs?[key];
         return value + playerName ?? "--missing--";
-    }
+    }*/
 
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
     public void StartHighLowGame(Player attacker, Player defender)
     {
+        UniversalSettings us = UniversalSettings.instance;
         humanPlayerEncountered = true;
         ToggleNumberCardUIContainer(true);
 
         //set up attacker and defender. Attacker is always the current player
-        attackerNameText.text = GetText("encounter_attacker", attacker.playerName);
-        defenderNameText.text = GetText("encounter_defender", defender.playerName);
+        attackerNameText.text = us.GetText("encounter_attacker") + attacker.playerName;
+        defenderNameText.text = us.GetText("encounter_defender") + defender.playerName;
 
         //get 2 random number cards
         int randCard = Random.Range(0, numberCards.Length);
@@ -94,12 +95,12 @@ public class NumberCardManager : MonoBehaviour
         hiddenCard.cardFace = flippedNumberCards[randCard].cardFace;
 
         //play TTS
-        UniversalSettings us = UniversalSettings.instance;
-        if (us.ttsEnabled)
+        //UniversalSettings us = UniversalSettings.instance;
+        /*if (us.ttsEnabled)
         {
             string[] keys = {"encounter_instructions", "encounter_lowToHigh"};
             StartCoroutine(PlayTTS(keys, 5.5f));
-        }
+        }*/
 
         //get the odds
         //float highOdds = 0;
@@ -112,8 +113,8 @@ public class NumberCardManager : MonoBehaviour
             case UI.ProbabilityType.Decimal:
                 highOdds = Mathf.Round((float)(maxValue - revealedValue) / (float)totalOutcomes * 100) / 100.0f;
                 lowOdds = Mathf.Round((float)(revealedValue - minValue) / (float)totalOutcomes * 100) / 100.0f;
-                highButtonText.text = GetText("highButtonText") + " (" + highOdds + ")";
-                lowButtonText.text = GetText("lowButtonText") + " (" + lowOdds + ")";
+                highButtonText.text = us.GetText("highButtonText") + " (" + highOdds + ")";
+                lowButtonText.text = us.GetText("lowButtonText") + " (" + lowOdds + ")";
                 break;
 
             case UI.ProbabilityType.Fraction:
@@ -121,15 +122,15 @@ public class NumberCardManager : MonoBehaviour
                 highOdds = (float)(maxValue - revealedValue);
                 lowOdds = (float)(revealedValue - minValue); 
                 float denominator = (float)totalOutcomes;
-                highButtonText.text = GetText("highButtonText") + " (" + highOdds + "/" + denominator + ")";
-                lowButtonText.text = GetText("lowButtonText") + " (" + lowOdds + "/" + denominator + ")";
+                highButtonText.text = us.GetText("highButtonText") + " (" + highOdds + "/" + denominator + ")";
+                lowButtonText.text = us.GetText("lowButtonText") + " (" + lowOdds + "/" + denominator + ")";
                 break;
 
             case UI.ProbabilityType.Percent:
                 highOdds = Mathf.Round((float)(maxValue - revealedValue) / (float)totalOutcomes * 100 * 10) / 10.0f;
                 lowOdds = Mathf.Round((float)(revealedValue - minValue) / (float)totalOutcomes * 100 * 10) / 10.0f;
-                highButtonText.text = GetText("highButtonText") + " (" + highOdds + "%)";
-                lowButtonText.text = GetText("lowButtonText") + " (" + lowOdds + "%)";
+                highButtonText.text = us.GetText("highButtonText") + " (" + highOdds + "%)";
+                lowButtonText.text = us.GetText("lowButtonText") + " (" + lowOdds + "%)";
                 break;
         }
 
