@@ -78,7 +78,7 @@ public class Home : BoardSpace
         if (tm == null)
         {
             LessonManager lm = LessonManager.instance;
-            if (!lm.miniLessonList[2].lessonViewed && gm.playerIndex == 0)
+            if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[2].lessonViewed && gm.playerIndex == 0)
             {
                 gm.miniLessonIndex = 2;
                 gm.SetGameState(GameManager.GameState.GetMiniLesson);

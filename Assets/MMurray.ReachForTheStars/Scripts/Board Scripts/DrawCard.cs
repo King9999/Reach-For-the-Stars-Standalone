@@ -54,7 +54,7 @@ public class DrawCard : BoardSpace
         if (tm == null)
         {
             LessonManager lm = LessonManager.instance;
-            if (!lm.miniLessonList[1].lessonViewed && gm.playerIndex == 0)
+            if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[1].lessonViewed && gm.playerIndex == 0)
             {
                 gm.miniLessonIndex = 1;
                 gm.SetGameState(GameManager.GameState.GetMiniLesson);

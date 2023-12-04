@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     
     public GameData gameData;
     //SaveState saveState;
-    public bool resumedSaveState;       //if true, continuing game from saved state
+    //public bool resumedSaveState;       //if true, continuing game from saved state
 
     public enum GameState
     {
@@ -1086,7 +1086,7 @@ public class GameManager : MonoBehaviour
                         //player.starTotal = 0;
                     goto case GameState.EndGame;
                 }
-                else if (!us.allLessonsViewed && 
+                else if (!us.extraModeEnabled && !us.allLessonsViewed && 
                     (tm.newGameStarted && !lm.lessonList[13].lessonViewed) || (!lm.lessonList[lessonIndex].lessonViewed && lm.lessonList[lessonIndex].roundToDisplayLesson == currentRound && !lessonViewedThisRound && currentRound > 0))
                 {
                     //open up a lesson
@@ -1097,7 +1097,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     //check for "Trapped Caches" mod
-                    if (!resumedSaveState && em.activeMod != null && em.activeMod.boardID == 2)
+                    if (/*!resumedSaveState &&*/ em.activeMod != null && em.activeMod.boardID == 2)
                     {
                         em.activeMod.Activate();
                     }
@@ -1107,9 +1107,9 @@ public class GameManager : MonoBehaviour
                         em.activeMod.Activate();
                     }
                     
-                    resumedSaveState = false;
+                    //resumedSaveState = false;
                     //saveState.WriteState(gameData);
-                    lessonViewedThisRound = false;
+                    lessonViewedThisRound = !us.extraModeEnabled ? false : true;
                     currentRound++;
                     //currentRound += 10;
                     //currentRound += 3;
@@ -1135,7 +1135,7 @@ public class GameManager : MonoBehaviour
                         //AI players do not have to choose between rolling dice or playing a card. They will always check
                         //for cards to use before rolling dice.
                         //Draw a Card mod
-                        if (!resumedSaveState && em.activeMod != null && em.activeMod.boardID == 3)
+                        if (/*!resumedSaveState &&*/ em.activeMod != null && em.activeMod.boardID == 3)
                         {
                             em.activeMod.Activate();
                         }
@@ -1183,13 +1183,13 @@ public class GameManager : MonoBehaviour
                     if (!extraRound)
                     {
                         //check for a lesson
-                        if (!lm.miniLessonList[14].lessonViewed && currentRound == 4)
+                        if (!us.extraModeEnabled && lm.miniLessonList[14].lessonViewed && currentRound == 4)
                         {
                             miniLessonIndex = 14;
                             SetGameState(GameState.GetMiniLesson);
                         }
                         //check for assessment
-                        else if (currentRound == 6)
+                        else if (!us.extraModeEnabled && currentRound == 6)
                         {
                             goto case GameState.StartAssessment;
                         }
@@ -1229,7 +1229,7 @@ public class GameManager : MonoBehaviour
                             //AI players do not have to choose between rolling dice or playing a card. They will always check
                             //for cards to use before rolling dice.
                             //Draw a Card mod
-                            if (!resumedSaveState && em.activeMod != null && em.activeMod.boardID == 3)
+                            if (/*!resumedSaveState &&*/ em.activeMod != null && em.activeMod.boardID == 3)
                             {
                                 em.activeMod.Activate();
                             }
@@ -1268,7 +1268,7 @@ public class GameManager : MonoBehaviour
                 ui.ToggleAlertUI(false);
                 
                 //if first time playing, prevent round start until lesson is closed.
-                if (!lm.lessonList[13].lessonViewed)
+                if (!UniversalSettings.instance.extraModeEnabled && !lm.lessonList[13].lessonViewed)
                 {
                     playerIndex = 0;
                     currentPlayer = playerList[playerIndex];
@@ -1398,7 +1398,7 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         //show mini lesson for first time
-                        if (!lm.miniLessonList[4].lessonViewed)
+                        if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[4].lessonViewed)
                         {
                             miniLessonIndex = 4;
                             SetGameState(GameState.GetMiniLesson);
@@ -1674,7 +1674,7 @@ public class GameManager : MonoBehaviour
                 dice.ToggleCross(false);
 
                 //never show the card effect lesson in this state because it overlaps with encounter window.
-                if (!lm.miniLessonList[5].lessonViewed)
+                if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[5].lessonViewed)
                 {
                     lm.ToggleMiniLesson(5, false);
                     lm.miniLessonList[5].lessonViewed = false;
@@ -1759,7 +1759,7 @@ public class GameManager : MonoBehaviour
                             }
 
                             //mini lesson appears before game starts.
-                            if (!lm.miniLessonList[9].lessonViewed)
+                            if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[9].lessonViewed)
                             {
                                 //if card effect lesson is currently open, close it for now and let player view it later.
                                 if (lm.miniLessonList[5].gameObject.activeSelf)
@@ -1790,7 +1790,7 @@ public class GameManager : MonoBehaviour
                             {
 
                                 //mini lesson appears before game starts.
-                                if (!lm.miniLessonList[9].lessonViewed)
+                                if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[9].lessonViewed)
                                 {
                                     //if card effect lesson is currently open, close it for now and let player view it later.
                                     if (lm.miniLessonList[5].gameObject.activeSelf)
@@ -1834,7 +1834,7 @@ public class GameManager : MonoBehaviour
                             }
 
                             //mini lesson appears before game starts.
-                            if (!lm.miniLessonList[9].lessonViewed)
+                            if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[9].lessonViewed)
                             {
                                 miniLessonIndex = 9;
                                 SetGameState(GameState.GetMiniLesson);
@@ -1888,7 +1888,7 @@ public class GameManager : MonoBehaviour
                             if (!opponent.isAI)
                             {
                                 //mini lesson appears before game starts.
-                                if (!lm.miniLessonList[9].lessonViewed)
+                                if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[9].lessonViewed)
                                 {
                                     miniLessonIndex = 9;
                                     SetGameState(GameState.GetMiniLesson);

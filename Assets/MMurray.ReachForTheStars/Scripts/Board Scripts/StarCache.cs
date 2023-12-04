@@ -99,13 +99,14 @@ public class StarCache : BoardSpace
                 if (tm == null)
                 {
                     LessonManager lm = LessonManager.instance;
-                    if (!lm.miniLessonList[0].lessonViewed && gm.playerIndex == 0 /*&& probability == 0.5f*/)
+                    UniversalSettings us = UniversalSettings.instance;
+                    if (!us.extraModeEnabled && !lm.miniLessonList[0].lessonViewed && gm.playerIndex == 0 /*&& probability == 0.5f*/)
                     {
                         gm.miniLessonIndex = 0;
                         gm.SetGameState(GameManager.GameState.GetMiniLesson);
                     }
 
-                    if (!lm.miniLessonList[0].gameObject.activeSelf && !lm.miniLessonList[8].lessonViewed && gm.playerIndex == 0 && probability == 0.25f)
+                    if (!us.extraModeEnabled && !lm.miniLessonList[0].gameObject.activeSelf && !lm.miniLessonList[8].lessonViewed && gm.playerIndex == 0 && probability == 0.25f)
                     {
                         gm.miniLessonIndex = 8;
                         gm.SetGameState(GameManager.GameState.GetMiniLesson);
@@ -136,7 +137,7 @@ public class StarCache : BoardSpace
             if (tm == null)
             {
                 LessonManager lm = LessonManager.instance;
-                if (!lm.miniLessonList[3].lessonViewed && gm.playerIndex == 0)
+                if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[3].lessonViewed && gm.playerIndex == 0)
                 {
                     gm.miniLessonIndex = 3;
                     gm.SetGameState(GameManager.GameState.GetMiniLesson);

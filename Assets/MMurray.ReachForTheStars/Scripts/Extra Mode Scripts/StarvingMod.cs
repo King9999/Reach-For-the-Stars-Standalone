@@ -15,7 +15,7 @@ public class StarvingMod : ExtraMod
 
             //check for lesson
             LessonManager lm = LessonManager.instance;
-            if (!lm.miniLessonList[0].lessonViewed && gm.playerIndex == 0)
+            if (!UniversalSettings.instance.extraModeEnabled && !lm.miniLessonList[0].lessonViewed && gm.playerIndex == 0)
             {
                 gm.miniLessonIndex = 0;
                 gm.SetGameState(GameManager.GameState.GetMiniLesson);
