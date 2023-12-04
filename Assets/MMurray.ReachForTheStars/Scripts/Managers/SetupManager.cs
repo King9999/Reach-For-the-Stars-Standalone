@@ -93,46 +93,47 @@ public class SetupManager : MonoBehaviour
     }
 
 
-    string GetText (string key)
+    /*string GetText (string key)
     {
         string value = SharedState.LanguageDefs?[key];
         return value ?? "--missing--";
-    }
+    }*/
 
     public void UpdateLanguage()
     {
-        twoPlayerButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("twoPlayers");
-        threePlayerButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("threePlayers");
-        confirmNameButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("confirmName");
-        randomNameButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("randomName");
-        backButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("backButtonText");
-        howManyPlayersText.text = GetText("howManyPlayers");
-        enterNameText.text = GetText("enterName");
-        choosePlayingPieceText.text = GetText("chooseColor");
-        chooseBoardText.text = GetText("chooseBoard");
+        UniversalSettings us = UniversalSettings.instance;
+        twoPlayerButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("twoPlayers");
+        threePlayerButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("threePlayers");
+        confirmNameButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("confirmName");
+        randomNameButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("randomName");
+        backButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("backButtonText");
+        howManyPlayersText.text = us.GetText("howManyPlayers");
+        enterNameText.text = us.GetText("enterName");
+        choosePlayingPieceText.text = us.GetText("chooseColor");
+        chooseBoardText.text = us.GetText("chooseBoard");
 
         //playing piece colours
-        playingPieceColors[0].pieceColorName.text = GetText("pieceColor_blue");
-        playingPieceColors[1].pieceColorName.text = GetText("pieceColor_green");
-        playingPieceColors[2].pieceColorName.text = GetText("pieceColor_purple");
-        playingPieceColors[3].pieceColorName.text = GetText("pieceColor_red");
-        playingPieceColors[4].pieceColorName.text = GetText("pieceColor_yellow");
-        playingPieceColors[5].pieceColorName.text = GetText("pieceColor_teal");
-        playingPieceColors[6].pieceColorName.text = GetText("pieceColor_black");
-        playingPieceColors[7].pieceColorName.text = GetText("pieceColor_white");
+        playingPieceColors[0].pieceColorName.text = us.GetText("pieceColor_blue");
+        playingPieceColors[1].pieceColorName.text = us. GetText("pieceColor_green");
+        playingPieceColors[2].pieceColorName.text = us.GetText("pieceColor_purple");
+        playingPieceColors[3].pieceColorName.text = us.GetText("pieceColor_red");
+        playingPieceColors[4].pieceColorName.text = us.GetText("pieceColor_yellow");
+        playingPieceColors[5].pieceColorName.text = us.GetText("pieceColor_teal");
+        playingPieceColors[6].pieceColorName.text = us.GetText("pieceColor_black");
+        playingPieceColors[7].pieceColorName.text = us.GetText("pieceColor_white");
 
         //board selection
-        boards[0].boardDetails.text = GetText("board_0");
-        boards[1].boardDetails.text = GetText("board_1");
-        boards[2].boardDetails.text = GetText("board_2");
-        boards[3].boardDetails.text = GetText("board_3");
-        boards[4].boardDetails.text = GetText("board_4");
-        boards[5].boardDetails.text = GetText("board_5");
+        boards[0].boardDetails.text = us.GetText("board_0");
+        boards[1].boardDetails.text = us.GetText("board_1");
+        boards[2].boardDetails.text = us.GetText("board_2");
+        boards[3].boardDetails.text = us.GetText("board_3");
+        boards[4].boardDetails.text = us.GetText("board_4");
+        boards[5].boardDetails.text = us.GetText("board_5");
 
         //extra mode
         //extraModeToggle.GetComponentInChildren<Text>().text = GetText("extraMode");
-        extraModeTitle.text = GetText("extraMode");
-        extraModeDetails.text = GetText("extraMode_details");
+        extraModeTitle.text = us.GetText("extraMode");
+        extraModeDetails.text = us.GetText("extraMode_details");
         //extraModeToggle.isOn = false;
     }
 
@@ -143,24 +144,24 @@ public class SetupManager : MonoBehaviour
         {
             case SetupState.NumberOfPlayers:
                 setupState = SetupState.NumberOfPlayers;
-                if (us.ttsEnabled)
+                /*if (us.ttsEnabled)
                 {
                     //string[] keys = {"howManyPlayers", "twoPlayers", "threePlayers", "backButtonText"};
                     //StartCoroutine(PlayTTS(keys, 1.5f));
                     LOLSDK.Instance.SpeakText("howManyPlayers");
-                }
+                }*/
                 playerSelectUIContainer.gameObject.SetActive(true);
                 nameEntryUIContainer.gameObject.SetActive(false);
                 break;
 
             case SetupState.PlayerNameEntry:
                 setupState = SetupState.PlayerNameEntry;
-                if (us.ttsEnabled)
+                /*if (us.ttsEnabled)
                 {
                     LOLSDK.Instance.SpeakText("enterName");
                     //string[] keys = {"enterName", "confirmName", "randomName", "backButtonText"};
                     //StartCoroutine(PlayTTS(keys, 1.5f));
-                }
+                }*/
                 playerNames = new List<string>();               //if we return to this state, list should be cleared
                 playerSelectUIContainer.gameObject.SetActive(false);
                 playingPieceSelectUIContainer.gameObject.SetActive(false);
@@ -170,10 +171,10 @@ public class SetupManager : MonoBehaviour
             case SetupState.PlayingPieceSelect:
                 setupState = SetupState.PlayingPieceSelect;
                 selectedPieceColor.Clear(); //must do this step to prevent more than 3 entries from being entered when returning to this state
-                if (us.ttsEnabled)
+                /*if (us.ttsEnabled)
                 {
                     LOLSDK.Instance.SpeakText("chooseColor");
-                }
+                }*/
                 nameEntryUIContainer.gameObject.SetActive(false);
                 boardSelectUIContainer.gameObject.SetActive(false);
                 playingPieceSelectUIContainer.gameObject.SetActive(true);
@@ -181,13 +182,13 @@ public class SetupManager : MonoBehaviour
 
             case SetupState.SelectBoard:
                 setupState = SetupState.SelectBoard;
-                if (us.ttsEnabled)
+                /*if (us.ttsEnabled)
                 {
                     LOLSDK.Instance.SpeakText("chooseBoard");
                     //string[] keys = {"chooseBoard", "pieceColor_blue", "pieceColor_green", "pieceColor_purple" ,"pieceColor_red", "pieceColor_yellow",
                          //"pieceColor_teal", "pieceColor_black", "pieceColor_white", "backButtonText"};
                     //StartCoroutine(PlayTTS(keys, 1.5f));
-                }
+                }*/
                 playingPieceSelectUIContainer.gameObject.SetActive(false);
                 boardSelectUIContainer.gameObject.SetActive(true);
                 break;

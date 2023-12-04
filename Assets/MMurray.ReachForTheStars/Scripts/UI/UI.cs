@@ -133,52 +133,53 @@ namespace MMurray.ReachForTheStars
             am = AudioManager.instance;
         }
 
-        string GetText (string key)
+        /*string GetText (string key)
         {
             string value = SharedState.LanguageDefs?[key];
             return value ?? "--missing--";
-        }
+        }*/
 
-        string GetText (string key, string playerName)
+        /*string GetText (string key, string playerName)
         {
             string value = SharedState.LanguageDefs?[key];
             value = value.Trim('A', 'I', 'O', 'p', 'p', 'o', 'n', 'e', 'n', 't'); //removing these letters so it doesn't appear in game, but TTS will read
             return playerName + value ?? "--missing--";
-        }
+        }*/
 
-        string GetText (string key, int number)
+        /*string GetText (string key, int number)
         {
             string value = SharedState.LanguageDefs?[key];
             return value + number ?? "--missing--";
-        }
+        }*/
         
         //called in ReadState() in GameClasses.cs. Roll dice button is updated in Dice.cs
         public void UpdateLanguage()
         {
-            playCardButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("playCardButtonText");
-            skipCardButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("skipCardButtonText");
-            discardButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("discardButtonText");
-            backButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("backButtonText");
-            restartGameButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("restartGameButtonText");
-            exitGameButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("exitGameButtonText");
-            selectRollDiceButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("selectRollDiceButtonText");
-            selectPlayCardButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("playCardButtonText");
-            rollDiceBackButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("backButtonText");
-            pauseText.text = GetText("gamePaused");
-            resumeGameText.text = GetText("unpauseGame");
-            totalRollsText.text = GetText("totalRolls");
-            totalCardsText.text = GetText("totalCards");
+            UniversalSettings us = UniversalSettings.instance;
+            playCardButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("playCardButtonText");
+            skipCardButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("skipCardButtonText");
+            discardButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("discardButtonText");
+            backButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("backButtonText");
+            restartGameButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("restartGameButtonText");
+            exitGameButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("exitGameButtonText");
+            selectRollDiceButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("selectRollDiceButtonText");
+            selectPlayCardButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("playCardButtonText");
+            rollDiceBackButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("backButtonText");
+            pauseText.text = us.GetText("gamePaused");
+            resumeGameText.text = us.GetText("unpauseGame");
+            totalRollsText.text = us.GetText("totalRolls");
+            totalCardsText.text = us.GetText("totalCards");
             
             //tutorial stuff
             TutorialManager tm = TutorialManager.instance;
             if (tm != null)
             {
-                exitTutorialButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("returnTitleButtonText");
-                homeHelpText.text = GetText("tutorial_homeName");
-                starCacheHelpText.text = GetText("tutorial_starCacheName");
-                drawCardHelpText.text = GetText("tutorial_drawCardName");
-                encounterHelpText.text = GetText("tutorial_encounter");
-                cardsHelpText.text = GetText("tutorial_cards");
+                exitTutorialButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("returnTitleButtonText");
+                homeHelpText.text = us.GetText("tutorial_homeName");
+                starCacheHelpText.text = us.GetText("tutorial_starCacheName");
+                drawCardHelpText.text = us.GetText("tutorial_drawCardName");
+                encounterHelpText.text = us.GetText("tutorial_encounter");
+                cardsHelpText.text = us.GetText("tutorial_cards");
             }
            
         
@@ -189,11 +190,11 @@ namespace MMurray.ReachForTheStars
 
             //updating buttons for number card manager here just to be consistent and keep everything in one spot
             NumberCardManager ncm = NumberCardManager.instance;
-            ncm.highButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("highButtonText");
-            ncm.lowButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("lowButtonText");
-            ncm.lowestToHighestText.text = GetText("encounter_lowToHigh");
-            ncm.instructionsText.text = GetText("encounter_instructions");
-            ncm.titleBarText.text = GetText("encounter_title");
+            ncm.highButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("highButtonText");
+            ncm.lowButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("lowButtonText");
+            ncm.lowestToHighestText.text = us.GetText("encounter_lowToHigh");
+            ncm.instructionsText.text = us.GetText("encounter_instructions");
+            ncm.titleBarText.text = us.GetText("encounter_title");
 
             //card text
             CardManager cm = CardManager.instance;
@@ -202,72 +203,72 @@ namespace MMurray.ReachForTheStars
                 switch(cm.cardTypes[i].card.cardID)
                 {
                     case 0: //swift movement
-                        cardNameText[i] = GetText("cardName_0");
-                        abilityText[i] = GetText("ability_0");
-                        tipText[i] = GetText("tip_0");
+                        cardNameText[i] = us.GetText("cardName_0");
+                        abilityText[i] = us.GetText("ability_0");
+                        tipText[i] = us.GetText("tip_0");
                         cm.cardTypes[i].card.nameKey = "cardName_0";
                         cm.cardTypes[i].card.abilityKey = "ability_0";
                         cm.cardTypes[i].card.tipKey = "tip_0";
                         break;
 
                     case 1: //Move 1
-                        cardNameText[i] = GetText("cardName_1");
-                        abilityText[i] = GetText("ability_1");
-                        tipText[i] = GetText("tip_1");
+                        cardNameText[i] = us.GetText("cardName_1");
+                        abilityText[i] = us.GetText("ability_1");
+                        tipText[i] = us.GetText("tip_1");
                         cm.cardTypes[i].card.nameKey = "cardName_1";
                         cm.cardTypes[i].card.abilityKey = "ability_1";
                         cm.cardTypes[i].card.tipKey = "tip_1";
                         break;
 
                     case 2: //Move 2
-                        cardNameText[i] = GetText("cardName_2");
-                        abilityText[i] = GetText("ability_2");
-                        tipText[i] = GetText("tip_1");
+                        cardNameText[i] = us.GetText("cardName_2");
+                        abilityText[i] = us.GetText("ability_2");
+                        tipText[i] = us.GetText("tip_1");
                         cm.cardTypes[i].card.nameKey = "cardName_2";
                         cm.cardTypes[i].card.abilityKey = "ability_2";
                         cm.cardTypes[i].card.tipKey = "tip_1";
                         break;
 
                     case 3: //Move 3
-                        cardNameText[i] = GetText("cardName_3");
-                        abilityText[i] = GetText("ability_3");
-                        tipText[i] = GetText("tip_1");
+                        cardNameText[i] = us.GetText("cardName_3");
+                        abilityText[i] = us.GetText("ability_3");
+                        tipText[i] = us.GetText("tip_1");
                         cm.cardTypes[i].card.nameKey = "cardName_3";
                         cm.cardTypes[i].card.abilityKey = "ability_3";
                         cm.cardTypes[i].card.tipKey = "tip_1";
                         break;
 
                     case 4: //Extend
-                        cardNameText[i] = GetText("cardName_4");
-                        abilityText[i] = GetText("ability_4");
-                        tipText[i] = GetText("tip_4");
+                        cardNameText[i] = us.GetText("cardName_4");
+                        abilityText[i] = us.GetText("ability_4");
+                        tipText[i] = us.GetText("tip_4");
                         cm.cardTypes[i].card.nameKey = "cardName_4";
                         cm.cardTypes[i].card.abilityKey = "ability_4";
                         cm.cardTypes[i].card.tipKey = "tip_4";
                         break;
 
                     case 5: //Refill
-                        cardNameText[i] = GetText("cardName_5");
-                        abilityText[i] = GetText("ability_5");
-                        tipText[i] = GetText("tip_5");
+                        cardNameText[i] = us.GetText("cardName_5");
+                        abilityText[i] = us.GetText("ability_5");
+                        tipText[i] = us.GetText("tip_5");
                         cm.cardTypes[i].card.nameKey = "cardName_5";
                         cm.cardTypes[i].card.abilityKey = "ability_5";
                         cm.cardTypes[i].card.tipKey = "tip_5";
                         break;
 
                     case 6: //Go Home
-                        cardNameText[i] = GetText("cardName_6");
-                        abilityText[i] = GetText("ability_6");
-                        tipText[i] = GetText("tip_6");
+                        cardNameText[i] = us.GetText("cardName_6");
+                        abilityText[i] = us.GetText("ability_6");
+                        tipText[i] = us.GetText("tip_6");
                         cm.cardTypes[i].card.nameKey = "cardName_6";
                         cm.cardTypes[i].card.abilityKey = "ability_6";
                         cm.cardTypes[i].card.tipKey = "tip_6";
                         break;
 
                     case 7: //Jump
-                        cardNameText[i] = GetText("cardName_7");
-                        abilityText[i] = GetText("ability_7");
-                        tipText[i] = GetText("tip_7");
+                        cardNameText[i] = us.GetText("cardName_7");
+                        abilityText[i] = us.GetText("ability_7");
+                        tipText[i] = us.GetText("tip_7");
                         cm.cardTypes[i].card.nameKey = "cardName_7";
                         cm.cardTypes[i].card.abilityKey = "ability_7";
                         cm.cardTypes[i].card.tipKey = "tip_7";
@@ -280,28 +281,33 @@ namespace MMurray.ReachForTheStars
         public void DisplayAlert(string key)
         {
             alertUIContainer.gameObject.SetActive(true);
-            alertUI.text = GetText(key);
-            UniversalSettings us = UniversalSettings.instance;
-            if (us.ttsEnabled)
-                LOLSDK.Instance.SpeakText(key);
+            alertUI.text = UniversalSettings.instance.GetText(key);
+            //UniversalSettings us = UniversalSettings.instance;
+            //if (us.ttsEnabled)
+                //LOLSDK.Instance.SpeakText(key);
         }
 
         public void DisplayAlert(string key, string playerName)
         {
-            alertUIContainer.gameObject.SetActive(true);
-            alertUI.text = GetText(key, playerName);
             UniversalSettings us = UniversalSettings.instance;
-            if (us.ttsEnabled)
-                LOLSDK.Instance.SpeakText(key);
+            alertUIContainer.gameObject.SetActive(true);
+            //alertUI.text = GetText(key, playerName);
+            string text = us.GetText(key).Trim('A', 'I', 'O', 'p', 'p', 'o', 'n', 'e', 'n', 't'); //removing these letters so it doesn't appear in game
+            alertUI.text = playerName + text;
+
+            //if (us.ttsEnabled)
+               // LOLSDK.Instance.SpeakText(key);
         }
 
         public void DisplayAlert(string key, int value)
         {
-            alertUIContainer.gameObject.SetActive(true);
-            alertUI.text = GetText(key, value);
             UniversalSettings us = UniversalSettings.instance;
-            if (us.ttsEnabled)
-                LOLSDK.Instance.SpeakText(key);
+            alertUIContainer.gameObject.SetActive(true);
+            //alertUI.text = GetText(key, value);
+            alertUI.text = us.GetText(key) + value;
+
+            //if (us.ttsEnabled)
+            //LOLSDK.Instance.SpeakText(key);
         }
 
         public void UpdatePlayerStaus(int playerIndex, int starTotal, int cardCount)
@@ -368,7 +374,7 @@ namespace MMurray.ReachForTheStars
         //change roll button text depending on game state
         public void ChangeRollButtonText(string key)
         {
-            rollDiceButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText(key);
+            rollDiceButton.GetComponentInChildren<TextMeshProUGUI>().text = UniversalSettings.instance.GetText(key);
         }
 
         public void OnSelectRollDiceButtonClicked()
@@ -429,7 +435,7 @@ namespace MMurray.ReachForTheStars
         public void UpdateJumpChance(float value)
         {
             value = Mathf.Round(value * 100 * 10) / 10.0f;
-            jumpChanceText.text = GetText("extraMode_jumpChance") + " " + value + "%";
+            jumpChanceText.text = UniversalSettings.instance.GetText("extraMode_jumpChance") + " " + value + "%";
         }
         public void ToggleMiniLessonUIContainer(bool toggle)
         {
@@ -785,12 +791,13 @@ namespace MMurray.ReachForTheStars
             /****update various UI values****/
             GameManager gm = GameManager.instance;
             CardManager cm = CardManager.instance;
+            UniversalSettings us = UniversalSettings.instance;
 
             switch(probabilityType)
             {
                 case ProbabilityType.Decimal:
                     //star cache UI
-                    probabilityFormatUI.text = GetText("format_decimal");
+                    probabilityFormatUI.text = us.GetText("format_decimal");
                     foreach(BoardSpace space in gm.boardSpaceList)
                     {
                         if (space.TryGetComponent(out StarCache starCache))
@@ -819,13 +826,13 @@ namespace MMurray.ReachForTheStars
                         NumberCardManager nm = NumberCardManager.instance;
                         nm.highOdds = Mathf.Round((float)(nm.maxValue - nm.revealedCard.value) / (float)nm.totalOutcomes * 100) / 100.0f;
                         nm.lowOdds = Mathf.Round((float)(nm.revealedCard.value - nm.minValue) / (float)nm.totalOutcomes * 100) / 100.0f;
-                        nm.highButtonText.text = GetText("highButtonText") + " (" + nm.highOdds + ")";
-                        nm.lowButtonText.text = GetText("lowButtonText") + " (" + nm.lowOdds + ")";
+                        nm.highButtonText.text = us.GetText("highButtonText") + " (" + nm.highOdds + ")";
+                        nm.lowButtonText.text = us.GetText("lowButtonText") + " (" + nm.lowOdds + ")";
                     }
                     break;
 
                 case ProbabilityType.Percent:
-                    probabilityFormatUI.text = GetText("format_percent");
+                    probabilityFormatUI.text = us.GetText("format_percent");
                     foreach(BoardSpace space in gm.boardSpaceList)
                     {
                         if (space.TryGetComponent(out StarCache starCache))
@@ -855,13 +862,13 @@ namespace MMurray.ReachForTheStars
                         NumberCardManager nm = NumberCardManager.instance;
                         nm.highOdds = Mathf.Round((float)(nm.maxValue - nm.revealedCard.value) / (float)nm.totalOutcomes * 100 * 10) / 10.0f;
                         nm.lowOdds = Mathf.Round((float)(nm.revealedCard.value - nm.minValue) / (float)nm.totalOutcomes * 100 * 10) / 10.0f;
-                        nm.highButtonText.text = GetText("highButtonText") + " (" + nm.highOdds + "%)";
-                        nm.lowButtonText.text = GetText("lowButtonText") + " (" + nm.lowOdds + "%)";
+                        nm.highButtonText.text = us.GetText("highButtonText") + " (" + nm.highOdds + "%)";
+                        nm.lowButtonText.text = us.GetText("lowButtonText") + " (" + nm.lowOdds + "%)";
                     }
                     break;
 
                 case ProbabilityType.Fraction:
-                    probabilityFormatUI.text = GetText("format_fraction");
+                    probabilityFormatUI.text = us.GetText("format_fraction");
                     foreach(BoardSpace space in gm.boardSpaceList)
                     {
                         if (space.TryGetComponent(out StarCache starCache))
@@ -888,8 +895,8 @@ namespace MMurray.ReachForTheStars
                         nm.highOdds = (float)(nm.maxValue - nm.revealedCard.value);
                         nm.lowOdds = (float)(nm.revealedCard.value - nm.minValue); 
                         float denominator = (float)nm.totalOutcomes;
-                        nm.highButtonText.text = GetText("highButtonText") + " (" + nm.highOdds + "/" + denominator + ")";
-                        nm.lowButtonText.text = GetText("lowButtonText") + " (" + nm.lowOdds + "/" + denominator + ")";
+                        nm.highButtonText.text = us.GetText("highButtonText") + " (" + nm.highOdds + "/" + denominator + ")";
+                        nm.lowButtonText.text = us.GetText("lowButtonText") + " (" + nm.lowOdds + "/" + denominator + ")";
                     }
                     break;
             }
@@ -941,7 +948,7 @@ namespace MMurray.ReachForTheStars
             //UI travels a short distance upwards, then fades.
             Vector3 newTextPos = Camera.main.WorldToScreenPoint(textPos);
             feedbackUIs[feedbackIndex].transform.position = new Vector3(newTextPos.x, newTextPos.y + 20, 0);
-            feedbackUIs[feedbackIndex].text = GetText(key);
+            feedbackUIs[feedbackIndex].text = UniversalSettings.instance.GetText(key);
             ToggleFeedBackUI(feedbackIndex, true);
 
             Vector3 destinationPos = new Vector3(newTextPos.x, newTextPos.y + 40, 0);
