@@ -36,7 +36,7 @@ namespace MMurray.ReachForTheStars
 
              //Check for a save state.
             TitleManager tm = TitleManager.instance;
-            LOLSDK.Instance.LoadState<GameData>(state =>
+            /*LOLSDK.Instance.LoadState<GameData>(state =>
             {
                 if (state != null)
                 {
@@ -45,7 +45,7 @@ namespace MMurray.ReachForTheStars
                     buttonText.color = Color.white;
                 }
                 
-            });
+            });*/
 
            
             /*if (tm.saveStateFound)
@@ -74,18 +74,19 @@ namespace MMurray.ReachForTheStars
             }
         }*/
 
-        string GetText (string key)
+        /*string GetText (string key)
         {
             string value = SharedState.LanguageDefs?[key];
             return value ?? "--missing--";
-        }
+        }*/
 
         void UpdateLanguage()
         {
-            startButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("newGame");
-            continueButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("resumeGame");
-            tutorialButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("tutorial");
-            creditsButton.GetComponentInChildren<TextMeshProUGUI>().text = GetText("credits");
+            UniversalSettings us = UniversalSettings.instance;
+            startButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("newGame");
+            continueButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("resumeGame");
+            tutorialButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("tutorial");
+            creditsButton.GetComponentInChildren<TextMeshProUGUI>().text = us.GetText("credits");
         }
 
         public void StartGame()
